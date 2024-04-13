@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nintendo Wii U Downgrade Guide</title>
+    <!-- Internal CSS -->
+    <style>
+        :root {
+            --text-color: #ddd;
+            --primary-color: #ff69b4;
+            --secondary-color: #58c0ed;
+            --background-color: #111;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-top: 0;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to left, var(--primary-color), var(--secondary-color));
+            animation: animateGradient 2s linear infinite;
+            background-size: 200% 100%;
+        }
+
+        @keyframes animateGradient {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: 0 0;
+            }
+        }
+
+        h3,
+        h4 {
+            font-size: 24px;
+            color: var(--text-color);
+            margin-top: 20px;
+        }
+
+        a {
+            color: #58c0ed;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #ff69b4;
+        }
+
+        ol,
+        ul {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding-left: 20px;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        .step {
+            margin-bottom: 30px;
+            border-left: 3px solid var(--primary-color);
+            padding-left: 20px;
+            transition: border-color 0.3s ease;
+            color: var(--text-color);
+        }
+
+        .note {
+            margin-top: 20px;
+            font-style: italic;
+            color: #aaa;
+        }
+
+        pre {
+            background-color: #444;
+            color: var(--text-color);
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: var(--text-color);
+        }
+
+        /* Collapsed section style */
+        .collapsed {
+            display: none;
+        }
+    </style>
+
+    <!-- JavaScript -->
+    <script>
+        // Function to adjust gradient animation
+        function adjustGradient() {
+            const h1 = document.querySelector('h1');
+            h1.style.backgroundSize = '200% 100%';
+            h1.style.background = 'linear-gradient(to left, var(--primary-color), var(--secondary-color))';
+            h1.style.animation = 'animateGradient 2s linear infinite';
+        }
+        adjustGradient(); // Call the function on page load
+
+        // Function to toggle visibility of sections
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            section.classList.toggle('collapsed');
+        }
+
+        // Add event listeners to each step heading for collapsing/expanding
+        document.querySelectorAll('.step > h3').forEach((heading, index) => {
+            heading.addEventListener('click', () => {
+                toggleSection('step' + (index + 1));
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>Nintendo Wii U Downgrade Guide</h1>
+            <p class="note">Note: This guide covers downgrading to Wii U Menu v171 and HOME Menu v151. While the process could potentially be used to downgrade to other versions, it's specifically detailed for these two versions.</p>
+            <p><strong>Disclaimer:</strong> <span style="color: red;"><strong>I AM NOT RESPONSIBLE FOR ANY DAMAGE TO YOUR CONSOLE!</strong></span></p>
+        </header>
+
+        <!-- Main content -->
+        <main>
+            <!-- Step 1 -->
+            <section id="step1" class="step">
+                <h3>Requirements:</h3>
+                <ul>
+                    <li>Raspberry Pi Pico or an unpatched v1 Switch</li>
+                    <li><a href="https://github.com/GaryOderNichts/udpih">UDPIH</a> or <a href="https://github.com/GaryOderNichts/udpih_nxpayload">UDPIH NXPayload</a></li>
+                    <li><a href="https://github.com/GaryOderNichts/recovery_menu">Recovery_Menu</a></li>
+                    <li><a href="https://github.com/Maschell/JNUSTool">JNUSTool</a></li>
+                    <li><a href="https://raw.githubusercontent.com/SkyeDoesThings1/WiiU-Downgrade-Guide/main/wupclient.py">Modified version of WUPClient</a></li>
+                    <li>HxD (Hex Editor)</li>
+                    <li>Braincells (most important thing)</li>
+                    <li>A Wii U</li>
+                    <li>Knowledge of the differences between Wii U Menu and HOME Menu (Wii U Menu contains apps and HOME Menu is the pause menu)</li>
+                </ul>
+            </section>
+
+            <!-- Step 2 -->
+            <section id="step2" class="step">
+                <h3>Step 1: Downloading the Menus</h3>
+                <p>Using JNUSTool:</p>
+                <ol>
+                    <li>Open the folder where you installed JNUSTool.jar</li>
+                    <li>Open a CMD window in that folder and run the command:<br>
+                        <pre>java -jar JNUSTool.jar 0005001010040100 v171 -dlEncrypted</pre></li>
+                    <li>Wait for it to finish, then run:<br>
+                        <pre>java -jar JNUSTool.jar 000500301001010A v151 -dlEncrypted</pre></li>
+                    <li>Note: Title IDs are for US only; check <a href="https://wiiubrew.org/wiki/Title_database">WiiUBrew Title Database</a> for EUR and JPN</li>
+                </ol>
+            </section>
+
+            <!-- Step 3 -->
+            <section id="step3" class="step">
+                <h3>Step 2: SD Preparation</h3>
+                <ol>
+                    <li>Copy Recovery_Menu to the root of the SD card</li>
+                    <li>Create an install folder if it isn't there already and copy the downloaded folders into it</li>
+                </ol>
+            </section>
+
+            <!-- Step 4 -->
+            <section id="step4" class="step">
+                <h3>Step 3: Booting UDPIH</h3>
+                <p>Launch your Wii U into recovery_menu.</p>
+                <p>Note: Timing is crucial when booting UDPIH, so keep trying!</p>
+            </section>
+
+            <!-- Step 5 -->
+            <section id="step5" class="step">
+                <h3>Step 4: Starting WUPClient</h3>
+                <ol>
+                    <li>Navigate to Start WUPServer and select the option</li>
+                    <li>Open up WUPClient.py in a text editor and change line 30 to your IP</li>
+                    <li>Then open it using the command: <br></li>
+                    <pre>py -i wupclient.py</pre>
+                </ol>
+            </section>
+
+            <!-- Step 6 -->
+            <section id="step6" class="step">
+                <h3>Step 5: Deleting the Old Menu</h3>
+                <p>Run the following command to delete the Wii U menu:</p>
+                <pre>w.rmdir("/vol/storage_mlc01/sys/title/00050010/10040100")</pre>
+                <p>When prompted, type "y". Note: This might need to be done multiple times.</p>
+                <p>Repeat the same process for the HOME menu with this command:</p>
+                <pre>w.rmdir("/vol/storage_mlc01/sys/title/00050030/1001010a")</pre>
+                <p>Repeat both commands 2 or 3 times to ensure deletion.</p>
+            </section>
+
+            <!-- Step 7 -->
+            <section id="step7" class="step">
+                <h3>Step 6: Installing the New Menus</h3>
+                <p>Run the following commands to install the new menus:</p>
+                <pre>install_title("install/tmp_0005001010040100_v171")</pre>
+                <pre>install_title("install/tmp_000500301001010A_v151")</pre>
+                <p>Note: They should take around a minute to download. If it takes less time, repeat step 5.</p>
+            </section>
+
+            <!-- Step 8 -->
+            <section id="step8" class="step">
+                <h3>Step 7: Final Touches (Messing with versions.bin)</h3>
+                <p>There are two methods to complete this step:</p>
+                <ol>
+                    <li><strong>Method 1 (Easier but Riskier):</strong> Delete versions.bin by running the following command:</li>
+                    <pre>w.rm("/vol/system/security/versions.bin")</pre>
+                    <p>Reboot your Wii U. If you're in the old menu, congrats! If not, try method 2.</p>
+                    <li><strong>Method 2 (Harder but Safer):</strong> Edit versions.bin by following these steps:</li>
+                    <ol type="a">
+                        <li>Download your versions.bin:</li>
+                        <pre>w.dl("/vol/system/security/versions.bin")</pre>
+                        <li>Open versions.bin in HxD.</li>
+                        <li>Find <code>00 05 00 10 10 04 01 00</code> and change <code>01 15</code> (US) to <code>00 AB</code>, <code>00 E2</code> (JP), or <code>01 01</code> (EUR).</li>
+                        <li>Find <code>00 05 00 30 10 01 01 0A</code> and change <code>00 C5</code> (US) or <code>00 B4</code> (JP/EUR) to <code>00 97</code>.</li>
+                        <li>Save the changes and run the command w.up("versions.bin", "/vol/system/security/versions.bin").</li>
+                        <li>Reboot your Wii U and you should be done!</li>
+                    </ol>
+                </ol>
+                <h2>If you need further assistance, feel free to reach out to me on Discord: SkyeDoesThings!</h2>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p class="note">Special thanks to b3c3 for sparking my interest in this topic and to mike y for their invaluable help with editing the versions.bin file!</p>
+        </footer>
+    </div>
+</body>
+
+</html>
