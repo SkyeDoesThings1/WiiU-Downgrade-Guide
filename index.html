@@ -170,6 +170,7 @@
             <h1>Nintendo Wii U Downgrade Guide</h1>
             <p class="note">Note: This guide covers downgrading to Wii U Menu v171 and HOME Menu v151. While the process could potentially be used to downgrade to other versions, it's specifically detailed for these two versions.</p>
             <p><strong>Disclaimer:</strong> <span style="color: red;"><strong>I AM NOT RESPONSIBLE FOR ANY DAMAGE TO YOUR CONSOLE!</strong></span></p>
+            <p><strong>Disclaimer 2:</strong> <span style="color: red;"><strong>DO NOT DOWNGRADE TO v0!! The only way that'll work is if you have OSv9 so don't do it!</strong></span></p>
         </header>
 
         <!-- Main content -->
@@ -266,7 +267,8 @@
                         <li>Open versions.bin in HxD.</li>
                         <li>Find <code>00 05 00 10 10 04 01 00</code> and change <code>01 15</code> (US) to <code>00 AB</code>, <code>00 E2</code> (JP), or <code>01 01</code> (EUR).</li>
                         <li>Find <code>00 05 00 30 10 01 01 0A</code> and change <code>00 C5</code> (US) or <code>00 B4</code> (JP/EUR) to <code>00 97</code>.</li>
-                        <li>Save the changes and run the command w.up("versions.bin", "/vol/system/security/versions.bin").</li>
+                        <li>Save the changes and run the command
+                        <pre>w.up("versions.bin", "/vol/system/security/versions.bin")</pre></li>
                         <li>Reboot your Wii U and you should be done!</li>
                     </ol>
                 </ol>
