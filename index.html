@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <!-- Meta tags -->
     <meta charset="UTF-8">
@@ -135,6 +134,14 @@
             height: auto;
             margin-bottom: 10px;
         }
+
+        .code-text {
+           font-family: monospace;
+           background-color: #444;
+           color: #fff;
+           padding: 2px 4px;
+           border-radius: 4px;
+        }
     </style>
 
     <!-- JavaScript -->
@@ -168,7 +175,7 @@
         <!-- Header -->
         <header>
             <h1>Nintendo Wii U Downgrade Guide</h1>
-            <p class="note">Note: This guide covers downgrading to Wii U Menu v171 and HOME Menu v151. While the process could potentially be used to downgrade to other versions, it's specifically detailed for these two versions. If you do decide to downgrade to a different version, you may experience compatibility issues with Aroma and other apps depending on the version.</p>
+            <p class="note">Note: This guide covers downgrading to Wii U Menu v171 and HOME Menu v151. While the process could potentially be used to downgrade to other versions, it's specifically detailed for these two versions. If you decide to downgrade to a different version, you may experience compatibility issues with Aroma and other apps depending on the version.</p>
             <p class="note">Do NOT downgrade the Wii U Menu or HOME Menu to v0. It <span style="color: red;"><strong>will not</strong></span> work and in rare cases can cause a brick that cannot be fixed with UDPIH.</p>
             <p><strong>Disclaimer:</strong> <span style="color: red;"><strong>I AM NOT RESPONSIBLE FOR ANY DAMAGE TO YOUR CONSOLE!</strong></span></p>
         </header>
@@ -225,7 +232,7 @@
             <section id="step5" class="step">
                 <h3>Step 4: Starting WUPClient</h3>
                 <ol>
-                    <li>Navigate to Start WUPServer and select the option</li>
+                    <li>Navigate to <span class="code-text">Start WUPServer</span> and select the option</li>
                     <li>Open up WUPClient.py in a text editor and change line 30 to your IP</li>
                     <li>Then open it using the command: <br></li>
                     <pre>py -i wupclient.py</pre>
@@ -288,9 +295,8 @@
 
             <section id="step10" class="step">
                 <h3>HELP! I bricked!</h3>
-                <p>If you bricked while dowmgrading, it is generally pretty simple to fix.</p>
+                <p>If you bricked while downgrading, it is generally pretty simple to fix.</p>
                 <p>The best course of action if you bricked is to revert back to the latest Wii U Menu and HOME Menu, and then restart the process.</p>
-                <ol type="a"></ol>
                 <p>1. Boot recovery_menu and delete the newly installed files and versions.bin:</p>
                 <pre>w.rmdir("/vol/storage_mlc01/sys/title/00050010/10040100")</pre>
                 <pre>w.rmdir("/vol/storage_mlc01/sys/title/00050030/1001010a")</pre>
@@ -306,9 +312,8 @@
 
         <!-- Footer -->
         <footer>
-            <p class="note">Special thanks to b3c3 for sparking my interest in this topic and providing the modded WUPClient aswell as mike y for their invaluable help with editing the versions.bin file and forking the guide to make it even better!</p>
+            <p class="note">Special thanks to b3c3 for sparking my interest in this topic and providing the modded WUPClient as well as Mike Y for their invaluable help with editing the versions.bin file and forking the guide to make it even better!</p>
         </footer>
     </div>
 </body>
-
 </html>
