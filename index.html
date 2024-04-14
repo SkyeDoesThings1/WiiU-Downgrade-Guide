@@ -285,6 +285,22 @@
                     <img src="https://raw.githubusercontent.com/SkyeDoesThings1/WiiU-Downgrade-Guide/main/Results/WIN_20240413_18_37_30_Pro.jpg" alt="Result Image">
                 </div>
             </section>
+
+            <section id="step10" class="step">
+                <h3>HELP! I bricked!</h3>
+                <p>If you bricked while dowmgrading, it is generally pretty simple to fix.</p>
+                <p>The best course of action if you bricked is to revert back to the latest Wii U Menu and HOME Menu, and then restart the process.</p>
+                <ol type="a"></ol>
+                <p>1. Boot recovery_menu and delete the newly installed files and versions.bin:</p>
+                <pre>w.rmdir("/vol/storage_mlc01/sys/title/00050010/10040100")</pre>
+                <pre>w.rmdir("/vol/storage_mlc01/sys/title/00050030/1001010a")</pre>
+                <pre>w.rm("/vol/system/security/versions.bin")</pre>
+                <p>2. Redownload the latest version of the Wii U Menu and HOME Menu:</p>
+                <pre>java -jar JNUSTool.jar 0005001010040100 -dlEncrypted</pre>
+                <pre>java -jar JNUSTool.jar 000500301001010A -dlEncrypted</pre>
+                <p>After you download the latest files, start from Step 2.</p>
+            </section>
+
             <h2>If you need further assistance, feel free to reach out to me on Discord: SkyeDoesThings!</h2>
         </main>
 
